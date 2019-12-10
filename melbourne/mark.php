@@ -47,29 +47,31 @@
     </style>
   </head>
   <body>
+    <div id="latclicked"></div>
+    <div id="longclicked"></div>
     <div id="map"></div>
     <script>
       var map;
-      function initMap() {
-        map = new google.maps.Map(
-            document.getElementById('map'),
-            {center: new google.maps.LatLng(-37.808697589247046, 144.97193891371268), zoom: 12});
-
-               // Create markers.
-        <?php 
-        foreach ($listadevagas as $e) { ?>
+      var marker; 
+      function initMap() {map = new google.maps.Map(document.getElementById('map'),
+      {center: new google.maps.LatLng(-37.808697589247046, 144.97193891371268), zoom: 12});
+  <?php 
+  foreach ($listadevagas as $e) { ?>
               var ponto = new google.maps.LatLng(<?php echo $e->lat; ?>,<?php echo $e->lon; ?>);
-              var marker = new google.maps.Marker({
-              position: ponto,//seta posição
-              map: map,//Objeto mapa
-              title:'<?php echo $e->status;?>'//string que será exibida quando passar o mouse no marker
-      //icon: caminho_da_imagem
-  });
-        <?php
-            }
-        ?> 
+              //Função marker
+              marker = new google.maps.Marker({
+              position: ponto,
+              map: map,
+              title:'<?php echo $e->status;?>'});
+ 
+              marker.addListener('click', function(event) {              
+              alert(" <?php echo $e->lat; ?> , <?php echo $e->lon; ?> ");
+            });
+ <?php
+  }
+?> 
       }
-      google.maps.event.addListener(marker, 'click',function(){ alert("Hello World!"); });
+    
 
     </script>
     <script async defer
