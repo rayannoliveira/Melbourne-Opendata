@@ -50,6 +50,11 @@
     <div id="latclicked"></div>
     <div id="longclicked"></div>
     <div id="map"></div>
+    <form action="teste.php" method="post">
+      <input id="demo" type="text" name="location">
+      <input id="demo2" type="text" name="location2">
+      <button class="btn btn-primary" type="submit" style="margin:1px;width:250px;padding-right:17px;padding-top:18px;padding-bottom:13px;padding-left:15px;background-color:rgba(0,123,255);">Procurar> </button>
+    </form>
     <script>
       var map;
       var marker; 
@@ -66,6 +71,8 @@
  
               marker.addListener('click', function(event) {              
               alert(" <?php echo $e->lat; ?> , <?php echo $e->lon; ?> ");
+               document.getElementById("demo").value = "<?php echo $e->lat; ?>";
+               document.getElementById("demo2").value = "<?php echo $e->lon; ?>";
             });
  <?php
   }
